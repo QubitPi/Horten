@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -57,6 +59,10 @@ public class Controller {
      *
      * @return  The created appointment entity
      */
+    @Operation(
+            tags = "DingTalk",
+            summary = "Sends a notification to DingDing"
+    )
     @PostMapping(value = "/createNotification", produces = "application/json")
     String createNotification(@RequestBody(required = true) final String notification) {
         final ObjectNode text = JSON_MAPPER.createObjectNode();

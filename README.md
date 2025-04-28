@@ -6,12 +6,12 @@ webservice that sends real-time notifications to various client. It, currently, 
 
 - DingTalk (阿里钉钉)
 
-The Notification Webservice __is for__:
+The Notification Webservice is designed for:
 
 - real-time messaging capabilities
 - performance-wise optimization
 
-It __is not for__:
+It is NOT for:
 
 - security aspect, such as Authentication or Authorization
 - any business layer logics, such as formating a notification message
