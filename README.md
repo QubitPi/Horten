@@ -6,6 +6,18 @@ webservice that sends real-time notifications to various client. It, currently, 
 
 - DingTalk (阿里钉钉)
 
+The Notification Webservice __is for__:
+
+- real-time messaging capabilities
+- performance-wise optimization
+
+It __is not for__:
+
+- security aspect, such as Authentication or Authorization
+- any business layer logics, such as formating a notification message
+
+For this reason, Notification Webservice is suitable for a microservice architecture.
+
 Documentation
 -------------
 
@@ -27,6 +39,7 @@ java -jar target/notification-ws-0.0.1-SNAPSHOT.jar
 The default port is 8080.
 
 - Healthcheck: http://localhost:8080/actuator/health
+- Swagger UI: http://localhost:8080/swagger-ui/index.html
 - Sending a DingTalk notification:
 
   ```console
