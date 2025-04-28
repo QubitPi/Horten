@@ -1,6 +1,9 @@
 Notification Webservice
 =======================
 
+[![API Doc Badge]][API Doc URL]
+[![Apache License Badge]][Apache License, Version 2.0]
+
 __Notification Webservice__ is a full-fledged Spring Boot application that lets us set up, with minimal effort, a
 webservice that sends real-time notifications to various client. It, currently, supports the notifications to
 
@@ -51,8 +54,25 @@ The default port is 8080.
 Development
 -----------
 
-Running tests:
+### Prerequisites
+
+- JDK 17
+- Maven
+- Docker
+
+### Running tests
 
 ```console
 mvn clean verify
 ```
+
+License
+-------
+
+The use and distribution terms for [notification-ws]() are covered by the [Apache License, Version 2.0].
+
+[Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
+[Apache License, Version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
+
+[API Doc Badge]: https://img.shields.io/badge/Open%20API-Swagger-85EA2D.svg?style=for-the-badge&logo=openapiinitiative&logoColor=white&labelColor=6BA539
+[API Doc URL]: https://springdoc.org/
