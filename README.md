@@ -53,6 +53,31 @@ The default port is 8080.
   }' -v
   ```
 
+> [!CAUTION]
+>
+> When the webservice shall be contacted through a
+> [Docker Compose internal network](https://docker.qubitpi.org/compose/how-tos/networking/), it's URL must be prefixed
+> with __http://__. For example
+>
+> ```yaml
+> version: "3.9"
+> services:
+>   my-service:
+>     image: my-image
+>     depends_on:
+>       notification-ws:
+>         condition: service_healthy
+>     ...
+>
+>   notification-ws:
+>     image: paiondatahub/notification-ws
+>     expose:
+>       - 8080
+>     ...
+> ```
+>
+> Then in the `my-service`, the `notification-ws` API URL has to be "__http://notification-ws:8080__"
+
 ### Running from Code
 
 ```console

@@ -1,2 +1,3 @@
 file:///*
 http://localhost:*
+http://notification-ws:8080
