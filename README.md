@@ -1,6 +1,7 @@
 Notification Webservice
 =======================
 
+![Java Version Badge][Java Version Badge]
 [![API Doc Badge]][API Doc URL]
 [![Docker Hub][Docker Pulls Badge]][Docker Hub URL]
 [![Apache License Badge]][Apache License, Version 2.0]
@@ -134,3 +135,5 @@ The use and distribution terms for [notification-ws]() are covered by the [Apach
 
 [Docker Pulls Badge]: https://img.shields.io/docker/pulls/jack20191124/notification-ws?style=for-the-badge&logo=docker&color=2596EC
 [Docker Hub URL]: https://hub.docker.com/r/jack20191124/notification-ws
+
+[Java Version Badge]: https://img.shields.io/badge/Java-17-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
