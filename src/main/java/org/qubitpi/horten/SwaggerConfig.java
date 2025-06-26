@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.qubitpi.ws.notification;
+package org.qubitpi.horten;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,9 +39,9 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("Notification Webservice")
+                                .title("Horten")
                                 .version("0.0.1")
-                                .description("Notification Webservice REST API Interface")
+                                .description("Horten Webservice REST API Interface")
                                 .contact(
                                         new Contact()
                                                 .name("Jiaqi Liu")

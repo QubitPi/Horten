@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.qubitpi.ws.notification.dingding;
+package org.qubitpi.horten.dingding;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,7 +49,7 @@ public class Controller {
 
     private static final String FAILED_NOTIFICATION_MESSAGE = "The notification failed. Please contact backend team";
 
-    @Value("${notification-ws.dingding.access-token}")
+    @Value("${horten.dingding.access-token}")
     private String accessToken;
 
     /**

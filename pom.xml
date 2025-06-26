@@ -11,11 +11,11 @@
     </parent>
 
     <groupId>org.qubitpi</groupId>
-    <artifactId>notification-ws</artifactId>
+    <artifactId>horten</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>notification-ws</name>
+    <name>horten</name>
     <description>Spring Boot Starter based real-time notification webservice</description>
-    <url>https://github.com/QubitPi/notification-ws</url>
+    <url>https://github.com/QubitPi/horten</url>
 
     <licenses>
         <license>
