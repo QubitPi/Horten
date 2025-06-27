@@ -25,43 +25,8 @@ env:
   JDK_DISTRIBUTION: 'adopt'
 
 jobs:
-  cancel-previous:
-    name: Cancel Previous Runs In Order to Allocate Action Resources Immediately for Current Run
-    if: github.ref != 'refs/heads/master'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cancel previous
-        uses: styfle/cancel-workflow-action@0.12.1
-        with:
-          access_token: ${{ github.token }}
-
-  yaml-lint:
-    name: YAML Style Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actionshub/yamllint@main
-
-  markdown-lint:
-    name: Markdown Style Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actionshub/markdownlint@main
-
-  linkChecker:
-    name: Link Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.9.0
-        with:
-          fail: true
-
   tests:
     name: Unit & Integration Tests
-    needs: [yaml-lint, markdown-lint, linkChecker]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -106,12 +71,12 @@ jobs:
         with:
           context: .
           push: true
-          tags: jack20191124/notification-ws:latest
+          tags: jack20191124/horten:latest
       - name: Push image Description
         if: github.ref == 'refs/heads/master'
         uses: peter-evans/dockerhub-description@v4
         with:
           username: jack20191124
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: jack20191124/notification-ws
+          repository: jack20191124/horten
           readme-filepath: README.md

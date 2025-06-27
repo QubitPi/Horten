@@ -1,17 +1,17 @@
-Notification Webservice
-=======================
+Horten
+======
 
 ![Java Version Badge][Java Version Badge]
 [![API Doc Badge]][API Doc URL]
 [![Docker Hub][Docker Pulls Badge]][Docker Hub URL]
 [![Apache License Badge]][Apache License, Version 2.0]
 
-__Notification Webservice__ is a full-fledged Spring Boot application that lets us set up, with minimal effort, a
-webservice that sends real-time notifications to various client. It, currently, supports the notifications to
+__Horten__ is a full-fledged Spring Boot application that lets us set up, with minimal effort, a webservice that sends
+real-time notifications to various client. It, currently, supports the notifications to
 
 - DingTalk (阿里钉钉)
 
-The Notification Webservice is designed for:
+Horten is designed for:
 
 - real-time messaging capabilities
 - performance-wise optimization
@@ -21,7 +21,7 @@ It is NOT for:
 - security aspect, such as Authentication or Authorization
 - any business layer logics, such as formating a notification message
 
-For this reason, Notification Webservice is suitable for a microservice architecture.
+For this reason, Horten is suitable for a microservice architecture.
 
 Documentation
 -------------
@@ -38,8 +38,8 @@ commands:
 > [the DingTalk documentation](https://open.dingtalk.com/document/orgapp/custom-robot-access)
 
 ```console
-export NOTIFICATION_WS_DINGDING_ACCESS_TOKEN=<DingDing access token>
-docker run -it -p 8080:8080 -e NOTIFICATION_WS_DINGDING_ACCESS_TOKEN=$NOTIFICATION_WS_DINGDING_ACCESS_TOKEN jack20191124/notification-ws
+export HORTEN_DINGDING_ACCESS_TOKEN=<DingDing access token>
+docker run -it -p 8080:8080 -e HORTEN_DINGDING_ACCESS_TOKEN=$HORTEN_DINGDING_ACCESS_TOKEN jack20191124/horten
 ```
 
 The default port is 8080.
@@ -66,29 +66,29 @@ The default port is 8080.
 >   my-service:
 >     image: my-image
 >     depends_on:
->       notification-ws:
+>       horten:
 >         condition: service_healthy
 >     ...
 >
->   notification-ws:
->     image: paiondatahub/notification-ws
+>   horten:
+>     image: jack20191124/horten
 >     expose:
 >       - 8080
 >     ...
 > ```
 >
-> Then in the `my-service`, the `notification-ws` API URL has to be "__http://notification-ws:8080__"
+> Then in the `my-service`, the `horten` API URL has to be "__http://horten:8080__"
 
 ### Running from Code
 
 ```console
-git clone git@github.com:QubitPi/notification-ws.git
-cd notification-ws
+git clone git@github.com:QubitPi/Horten.git
+cd Horten
 mvn clean package
 
-export NOTIFICATION_WS_DINGDING_ACCESS_TOKEN=<DingDing access token>
+export HORTEN_DINGDING_ACCESS_TOKEN=<DingDing access token>
 
-java -jar target/notification-ws-0.0.1-SNAPSHOT.jar
+java -jar target/horten-0.0.1-SNAPSHOT.jar
 ```
 
 > [!TIP]
@@ -126,14 +126,14 @@ mvn clean verify
 License
 -------
 
-The use and distribution terms for [notification-ws]() are covered by the [Apache License, Version 2.0].
+The use and distribution terms for [Horten]() are covered by the [Apache License, Version 2.0].
 
 [Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
 [Apache License, Version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 [API Doc Badge]: https://img.shields.io/badge/Open%20API-Swagger-85EA2D.svg?style=for-the-badge&logo=openapiinitiative&logoColor=white&labelColor=6BA539
 [API Doc URL]: https://springdoc.org/
 
-[Docker Pulls Badge]: https://img.shields.io/docker/pulls/jack20191124/notification-ws?style=for-the-badge&logo=docker&color=2596EC
-[Docker Hub URL]: https://hub.docker.com/r/jack20191124/notification-ws
+[Docker Pulls Badge]: https://img.shields.io/docker/pulls/jack20191124/horten?style=for-the-badge&logo=docker&color=2596EC
+[Docker Hub URL]: https://hub.docker.com/r/jack20191124/horten
 
 [Java Version Badge]: https://img.shields.io/badge/Java-17-brightgreen?style=for-the-badge&logo=OpenJDK&logoColor=white
