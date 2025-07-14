@@ -10,6 +10,7 @@ __Horten__ is a full-fledged Spring Boot application that lets us set up, with m
 real-time notifications to various client. It, currently, supports the notifications to
 
 - DingTalk (阿里钉钉)
+- Email SMTP server
 
 Horten is designed for:
 
@@ -29,17 +30,45 @@ Documentation
 ### Running in Docker
 
 Please make sure Docker is installed
-([_Installing Docker_](https://docker.qubitpi.org/desktop/setup/install/mac-install/)), then execute this on-click
-commands:
+([_Installing Docker_](https://docker.qubitpi.org/desktop/setup/install/mac-install/)) first. Then 
 
 > [!TIP]
 >
-> For instructions on how to obtain the __Dingding access token__ used above, please refer to
-> [the DingTalk documentation](https://open.dingtalk.com/document/orgapp/custom-robot-access)
+> - ⚠️ Those surrounded by `<` and `>` have to be replaced by the actual values
+> - For instructions on how to obtain the __Dingding access token__ used above, please refer to
+>   [the DingTalk documentation](https://open.dingtalk.com/document/orgapp/custom-robot-access)
+> - In the email notification setup, we assume
+> 
+>   - [relaying emails via Gmail's SMTP server](https://support.google.com/a/answer/2956491)
+>   - the relaying port is one of the supported Gmail SMTP ports, such as _587 for STARTTLS_
+>   - the email of the relay user, i.e. the email sender, is _mysender@gmail.com_
+>   - the relay password is _myGoogleAppPassword_. Note that this should be the relay user's
+>     [App Password](https://support.google.com/accounts/answer/185833), not their personal gmail account password
+>   - the email of the person receiving the email notification is _myreceiver@gmail.com_
 
 ```console
+# Dingding notification
 export HORTEN_DINGDING_ACCESS_TOKEN=<DingDing access token>
-docker run -it -p 8080:8080 -e HORTEN_DINGDING_ACCESS_TOKEN=$HORTEN_DINGDING_ACCESS_TOKEN jack20191124/horten
+
+# Email notification via SMTP
+export SMTP_SERVER_DOMAIN=smtp.gmail.com
+export SMTP_SERVER_PORT=587
+export SENDER_EMAIL=mysender@gmail.com
+export SENDER_EMAIL_PASSWORD=myGoogleAppPassword
+export RECEIVER_EMAIL=myreceiver@gmail.com
+```
+
+then spin up Docker container with:
+
+```console
+docker run -it -p 8080:8080 \
+    -e HORTEN_DINGDING_ACCESS_TOKEN=$HORTEN_DINGDING_ACCESS_TOKEN \
+    -e SMTP_SERVER_DOMAIN=$SMTP_SERVER_DOMAIN \
+    -e SMTP_SERVER_PORT=$SMTP_SERVER_PORT \
+    -e SENDER_EMAIL=$SENDER_EMAIL \
+    -e SENDER_EMAIL_PASSWORD=$SENDER_EMAIL_PASSWORD \
+    -e RECEIVER_EMAIL=$RECEIVER_EMAIL \
+    jack20191124/horten
 ```
 
 The default port is 8080.
@@ -88,13 +117,28 @@ mvn clean package
 
 export HORTEN_DINGDING_ACCESS_TOKEN=<DingDing access token>
 
+export SMTP_SERVER_DOMAIN=smtp.gmail.com
+export SMTP_SERVER_PORT=587
+export SENDER_EMAIL=mysender@gmail.com
+export SENDER_EMAIL_PASSWORD=myGoogleAppPassword
+export RECEIVER_EMAIL=myreceiver@gmail.com
+
 java -jar target/horten-0.0.1-SNAPSHOT.jar
 ```
 
 > [!TIP]
 >
-> For instructions on how to obtain the __Dingding access token__ used above, please refer to
-> [the DingTalk documentation](https://open.dingtalk.com/document/orgapp/custom-robot-access)
+> - ⚠️ Those surrounded by `<` and `>` have to be replaced by the actual values
+> - For instructions on how to obtain the __Dingding access token__ used above, please refer to
+>   [the DingTalk documentation](https://open.dingtalk.com/document/orgapp/custom-robot-access)
+> - In the email notification setup, we assume
+>
+>   - [relaying emails via Gmail's SMTP server](https://support.google.com/a/answer/2956491)
+>   - the relaying port is one of the supported Gmail SMTP ports, such as _587 for STARTTLS_
+>   - the email of the relay user, i.e. the email sender, is _mysender@gmail.com_
+>   - the relay password is _myGoogleAppPassword_. Note that this should be the relay user's
+>     [App Password](https://support.google.com/accounts/answer/185833), not their personal gmail account password
+>   - the email of the person receiving the email notification is _myreceiver@gmail.com_
 
 The default port is 8080.
 

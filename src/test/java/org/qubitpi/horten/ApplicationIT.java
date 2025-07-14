@@ -18,16 +18,34 @@ package org.qubitpi.horten;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.qubitpi.horten.email.EmailController;
+import org.qubitpi.horten.email.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.http.HttpEntity;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 /**
  * The entity webservice integration tests.
  */
+@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationIT {
+
+    @Container
+    private static final GenericContainer SMTP_SERVER = new GenericContainer(
+            DockerImageName.parse("jack20191124/mailhog:latest")
+    )
+            .withExposedPorts(8025)
+            .withExposedPorts(1025);
 
     @LocalServerPort
     private int port;
@@ -35,11 +53,18 @@ class ApplicationIT {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private EmailController emailController;
+
+    @Autowired
+    private ConfigurableApplicationContext context;
+
     /**
      * Make sure the context is creating controller.
      */
     @Test
     void contextLoads() {
+        assertThat(emailController).isNotNull();
     }
 
     /**
@@ -49,5 +74,35 @@ class ApplicationIT {
     void testHealthcheck() {
         assertThat(this.restTemplate.getForObject("http://localhost:" + this.port + "/actuator/health", String.class))
                 .isEqualTo("{\"status\":\"UP\"}");
+    }
+
+    /**
+     * Dynamically set ArangoDB container connection info.
+     *
+     * @param registry  {@code application.properties} mutator at runtime
+     */
+    @DynamicPropertySource
+    static void registerPgProperties(final DynamicPropertyRegistry registry) {
+        registry.add(
+                "spring.mail.port",
+                () -> SMTP_SERVER.getMappedPort(1025)
+        );
+    }
+
+    /**
+     * Making sure email can be sent.
+     */
+    @Test
+    void send() {
+        final Email email = new Email();
+        email.title = "my title";
+        email.body = "my body";
+
+        assertThat(
+                this.restTemplate.postForObject(
+                        "http://localhost:" + port + "/email/send",
+                        new HttpEntity<>(email),
+                        String.class
+                )).isEqualTo("Success");
     }
 }

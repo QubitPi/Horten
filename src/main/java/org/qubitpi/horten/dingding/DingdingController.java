@@ -40,9 +40,9 @@ import java.net.http.HttpResponse;
  */
 @RestController
 @RequestMapping("/dingding")
-public class Controller {
+public class DingdingController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Controller.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DingdingController.class);
 
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
     private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
