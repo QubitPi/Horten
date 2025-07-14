@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.qubitpi.horten"},{"l":"org.qubitpi.horten.dingding"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.qubitpi.horten"},{"l":"org.qubitpi.horten.dingding"},{"l":"org.qubitpi.horten.email"}];updateSearchResults();
